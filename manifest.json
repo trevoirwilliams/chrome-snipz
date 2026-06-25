@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Chrome Snipz",
+  "description": "Store, search, and copy short text snippets for fast replies, comments, and course promotions.",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "Chrome Snipz",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "clipboardWrite"
+  ]
+}
