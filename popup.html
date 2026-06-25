@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chrome Snipz</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Chrome Snipz</p>
+          <h1>Fast text snippets</h1>
+        </div>
+        <span id="snippetCount" class="count-pill">0 saved</span>
+      </header>
+
+      <section class="toolbar" aria-label="Snippet tools">
+        <label class="field search-field" for="searchInput">
+          <span>Search</span>
+          <input id="searchInput" type="search" placeholder="Find snippets..." autocomplete="off" />
+        </label>
+
+        <label class="field category-filter" for="categoryFilter">
+          <span>Category</span>
+          <select id="categoryFilter">
+            <option value="all">All</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="snippet-list-panel" aria-live="polite">
+        <div id="emptyState" class="empty-state hidden">
+          <strong>No snippets found.</strong>
+          <p>Create one below or adjust your search.</p>
+        </div>
+        <ul id="snippetList" class="snippet-list"></ul>
+      </section>
+
+      <section class="editor-panel" aria-labelledby="editorTitle">
+        <div class="panel-heading">
+          <h2 id="editorTitle">Create snippet</h2>
+          <button id="cancelEditButton" class="ghost-button hidden" type="button">Cancel edit</button>
+        </div>
+
+        <form id="snippetForm" class="snippet-form">
+          <label class="field" for="titleInput">
+            <span>Title</span>
+            <input id="titleInput" type="text" maxlength="80" placeholder="LinkedIn course reply" required />
+          </label>
+
+          <label class="field" for="categoryInput">
+            <span>Category</span>
+            <input id="categoryInput" type="text" maxlength="40" placeholder="Course Promo" list="categorySuggestions" />
+            <datalist id="categorySuggestions"></datalist>
+          </label>
+
+          <label class="field" for="tagsInput">
+            <span>Tags <small>(comma-separated)</small></span>
+            <input id="tagsInput" type="text" maxlength="120" placeholder="linkedin, promo, dotnet" />
+          </label>
+
+          <label class="field" for="bodyInput">
+            <span>Snippet text</span>
+            <textarea id="bodyInput" maxlength="500" rows="5" placeholder="Paste or write your reusable response..." required></textarea>
+          </label>
+
+          <div class="form-footer">
+            <span id="charCounter" class="char-counter">0 / 500</span>
+            <button id="saveButton" class="primary-button" type="submit">Save snippet</button>
+          </div>
+          <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <footer class="footer-actions">
+        <button id="exportButton" class="secondary-button" type="button">Export JSON</button>
+        <button id="importButton" class="secondary-button" type="button">Import JSON</button>
+        <input id="importFileInput" class="visually-hidden" type="file" accept="application/json,.json" />
+      </footer>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
