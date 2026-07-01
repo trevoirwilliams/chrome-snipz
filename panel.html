@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chrome Snipz</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Chrome Snipz</p>
+          <h1>Reusable text snippets</h1>
+          <p class="subhead">Save short replies, notes, links, and reusable text blocks.</p>
+        </div>
+        <span id="snippetCount" class="count-pill">0 saved</span>
+      </header>
+
+      <section class="settings-panel" aria-labelledby="settingsTitle">
+        <div>
+          <h2 id="settingsTitle">Capture settings</h2>
+          <p>When enabled, copied browser selections can be reviewed before becoming snippets.</p>
+        </div>
+        <label class="toggle-row" for="captureToggle">
+          <input id="captureToggle" type="checkbox" />
+          <span>Watch copied selections</span>
+        </label>
+        <label class="toggle-row" for="appendLinksToggle">
+          <input id="appendLinksToggle" type="checkbox" />
+          <span>Append selected link URLs</span>
+        </label>
+      </section>
+
+      <section id="capturePanel" class="capture-panel hidden" aria-labelledby="captureTitle">
+        <div class="panel-heading">
+          <div>
+            <h2 id="captureTitle">Copied text detected</h2>
+            <p id="captureSource" class="muted-line"></p>
+          </div>
+          <button id="discardCaptureButton" class="ghost-button" type="button">Dismiss</button>
+        </div>
+        <p id="capturePreview" class="capture-preview"></p>
+        <div class="capture-actions">
+          <button id="saveCaptureButton" class="primary-button" type="button">Save as snippet</button>
+          <button id="loadCaptureButton" class="secondary-button" type="button">Load into editor</button>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Snippet tools">
+        <label class="field search-field" for="searchInput">
+          <span>Search</span>
+          <input id="searchInput" type="search" placeholder="Find snippets..." autocomplete="off" />
+        </label>
+
+        <label class="field category-filter" for="categoryFilter">
+          <span>Category</span>
+          <select id="categoryFilter">
+            <option value="all">All</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="snippet-list-panel" aria-live="polite">
+        <div id="emptyState" class="empty-state hidden">
+          <strong>No snippets found.</strong>
+          <p>Create one below or adjust your search.</p>
+        </div>
+        <ul id="snippetList" class="snippet-list"></ul>
+      </section>
+
+      <section class="editor-panel" aria-labelledby="editorTitle">
+        <div class="panel-heading">
+          <div>
+            <h2 id="editorTitle">Create snippet</h2>
+            <p id="draftStatus" class="muted-line">Draft autosaves locally while you type.</p>
+          </div>
+          <button id="cancelEditButton" class="ghost-button hidden" type="button">Cancel edit</button>
+        </div>
+
+        <form id="snippetForm" class="snippet-form">
+          <label class="field" for="titleInput">
+            <span>Title</span>
+            <input id="titleInput" type="text" maxlength="80" placeholder="Reusable reply" required />
+          </label>
+
+          <label class="field" for="categoryInput">
+            <span>Category</span>
+            <input id="categoryInput" type="text" maxlength="40" placeholder="General" list="categorySuggestions" />
+            <datalist id="categorySuggestions"></datalist>
+          </label>
+
+          <label class="field" for="tagsInput">
+            <span>Tags <small>(comma-separated)</small></span>
+            <input id="tagsInput" type="text" maxlength="120" placeholder="reply, support, promo" />
+          </label>
+
+          <label class="field" for="bodyInput">
+            <span>Snippet text</span>
+            <textarea id="bodyInput" maxlength="500" rows="6" placeholder="Paste or write your reusable text..." required></textarea>
+          </label>
+
+          <div class="form-footer">
+            <span id="charCounter" class="char-counter">0 / 500</span>
+            <div class="button-group">
+              <button id="clearDraftButton" class="secondary-button" type="button">Clear draft</button>
+              <button id="saveButton" class="primary-button" type="submit">Save snippet</button>
+            </div>
+          </div>
+          <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <footer class="footer-actions">
+        <button id="exportButton" class="secondary-button" type="button">Export JSON</button>
+        <button id="importButton" class="secondary-button" type="button">Import JSON</button>
+        <input id="importFileInput" class="visually-hidden" type="file" accept="application/json,.json" />
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
